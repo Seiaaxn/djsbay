@@ -6,7 +6,10 @@
  * File ini HANYA dipakai di sisi server (server functions TanStack Start).
  */
 
-import { createHash, randomUUID } from "crypto";
+// Pakai Web Crypto API (tersedia native di Node.js modern & Cloudflare Workers)
+// alih-alih modul "crypto" Node, supaya tidak butuh flag nodejs_compat saat
+// di-deploy ke Cloudflare Workers.
+const randomUUID = (): string => crypto.randomUUID();
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
