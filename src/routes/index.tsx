@@ -10,6 +10,7 @@ import {
   GitBranch,
 } from "lucide-react";
 import { img as resolveImg, onImgError } from "../lib/site-images";
+import { getPersistedSessionStart } from "../lib/session";
 import { CardBackdrop } from "../components/HeroBanner";
 import { HashtagSection } from "../components/TikTokSections";
 import { AnimatedCounter } from "../components/AnimatedCounter";
