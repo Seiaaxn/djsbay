@@ -20,33 +20,50 @@ export const GEN_FOLLOWER_REQUIREMENTS = [
 ];
 
 /**
- * Aturan penempatan generasi berdasarkan jumlah followers TikTok.
- * min/max bersifat inklusif. `max: null` artinya tidak ada batas atas.
- * Gen 1 dicek lebih dulu (rentang spesifik), lalu Gen 2, lalu Gen 3
- * sebagai fallback paling akhir — sesuaikan urutan/angka ini sesuai
- * kebutuhan komunitas.
+ * Tipe konten per generasi — digunakan oleh AI untuk mendeteksi
+ * gen yang tepat berdasarkan caption/bio TikTok pengguna.
+ *
+ * Gen 1 → creator preset, AMV, L2D, edit video (wajib 500+ followers)
+ * Gen 2 → creator konten anime, manga, manhwa, manhua, dll (bebas followers)
+ * Gen 3 → sama seperti Gen 1 (preset/AMV/L2D/edit) tapi bebas followers
+ *
+ * AI mendeteksi konten dari caption video yang di-submit:
+ *   - Jika caption/bio mengandung kata kunci anime (judul anime, karakter,
+ *     "anime edit", "amv", dll) → langsung Gen 2
+ *   - Jika mengandung "preset", "l2d", "live2d", "amv", "edit" → Gen 1 atau Gen 3
+ *     tergantung jumlah followers
+ */
+
+/**
+ * Aturan penempatan generasi.
+ * - Gen 1: creator preset/AMV/L2D/edit dengan MINIMAL 500 followers (wajib seleksi)
+ * - Gen 2: creator konten anime, manga, manhwa, manhua (bebas followers, tanpa seleksi)
+ * - Gen 3: creator preset/AMV/L2D/edit dengan KURANG DARI 500 followers (wajib seleksi)
+ *
+ * Logika pickGen di $action.ts perlu disesuaikan karena sekarang penentuan gen
+ * bukan hanya berdasarkan follower count, tapi juga tipe konten (dari caption).
  */
 export const GEN_RULES = [
   {
     gen: "Gen 1",
-    min: 500,
-    max: 10_000,
-    label: "Editor Menengah",
-    desc: "Untuk kreator/editor yang sudah punya basis followers (500–10K). Fokus konten: AMV/edit anime kualitas tinggi, konsisten posting, siap jadi contoh untuk gen di bawahnya.",
+    contentType: "preset" as const,
+    minFollowers: 500,
+    label: "Creator Preset & AMV",
+    desc: "Khusus creator preset, AMV, L2D, dan edit video yang sudah punya minimal 500 followers. Gen tertua yang jadi fondasi marga.",
   },
   {
     gen: "Gen 2",
-    min: 0,
-    max: null,
-    label: "Kreator Bebas",
-    desc: "Terbuka untuk semua jumlah followers. Fokus konten: bebas selama masih seputar editor/anime — cocok untuk yang ingin berkembang bareng komunitas.",
+    contentType: "anime" as const,
+    minFollowers: 0,
+    label: "Creator Anime & Manga",
+    desc: "Khusus creator konten anime, manga, manhwa, manhua, dan sejenisnya. Bebas followers — langsung masuk tanpa seleksi ketat.",
   },
   {
     gen: "Gen 3",
-    min: 0,
-    max: null,
-    label: "Pemula",
-    desc: "Terbuka untuk semua jumlah followers, termasuk akun baru. Fokus konten: belajar dasar editing/posting, dibimbing member gen lain.",
+    contentType: "preset" as const,
+    minFollowers: 0,
+    label: "Creator Preset & AMV (Pemula)",
+    desc: "Sama seperti Gen 1 namun tanpa syarat followers minimal. Cocok untuk creator preset/AMV/edit yang baru mulai membangun akun.",
   },
 ] as const;
 
