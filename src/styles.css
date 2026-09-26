@@ -1,0 +1,371 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Five Fail Family — Castorice Theme (terinspirasi dari palet warna
+ * karakter Castorice, Honkai: Star Rail).
+ * Background putih polos, border luar & elemen utama ungu tua,
+ * garis & teks hitam pekat. Shadow 3D ungu gelap, glow ungu lembut
+ * pada hover/focus. Nuansa elegan-gelap di atas latar putih bersih.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Space Grotesk", "Archivo Black", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* ── Warna utama: UNGU CERAH (Castorice, tanpa hitam) ── */
+  --neo-purple:      #7c3aed;     /* ungu cerah — utama */
+  --neo-purple-dark: #5b21b6;     /* ungu tua untuk shadow (bukan hitam) */
+  --neo-ink:         #4c1d95;     /* ungu gelap — border & teks utama */
+
+  /* Border width tetap tegas */
+  --neo-border-w: 3px;
+
+  /* ── Shadow 3D berwarna — ungu, bukan hitam ── */
+  --shadow-sm:  3px 3px 0 0 var(--neo-purple-dark);
+  --shadow-md:  5px 5px 0 0 var(--neo-purple-dark);
+  --shadow-lg:  8px 8px 0 0 var(--neo-purple-dark);
+
+  /* ── Glow lembut (dipakai pada hover/focus/active element) ── */
+  --glow-blue:  0 0 8px 2px rgba(124,58,237,0.5);
+  --glow-cyan:  0 0 8px 2px rgba(168,85,247,0.4);
+  --glow-pink:  0 0 8px 2px rgba(217,70,239,0.35);
+  --glow-lime:  0 0 8px 2px rgba(147,51,234,0.35);
+
+  /* ── Background: PUTIH bersih ── */
+  --background: #ffffff;
+  --foreground: var(--neo-ink);
+
+  --card:              #ffffff;
+  --card-foreground:   var(--neo-ink);
+  --popover:           #ffffff;
+  --popover-foreground: var(--neo-ink);
+
+  /* Primary = UNGU CERAH */
+  --primary:            var(--neo-purple);
+  --primary-foreground: #ffffff;
+
+  --secondary:          #f3e8ff;
+  --secondary-foreground: var(--neo-ink);
+
+  --muted:              #f5f0fb;
+  --muted-foreground:   #6b4f8a;
+
+  /* Accent = Ungu cerah utama */
+  --accent:             var(--neo-purple);
+  --accent-foreground:  #ffffff;
+
+  /* Accent 2–5: varian ungu cerah (tanpa hitam/abu gelap) */
+  --accent-2:           #9333ea;   /* ungu medium */
+  --accent-2-foreground: #ffffff;
+  --accent-3:           #a855f7;   /* ungu terang/violet */
+  --accent-3-foreground: #ffffff;
+  --accent-4:           #c084fc;   /* ungu pastel terang */
+  --accent-4-foreground: var(--neo-ink);
+
+  --destructive:        #9d1f3a;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--neo-purple);
+  --input:  var(--neo-purple);
+  --ring:   var(--neo-purple);
+
+  /* Grid: garis ungu sangat tipis */
+  --grid-line: rgba(124,58,237,0.10);
+
+  /* Partikel klik — palet ungu cerah tanpa hitam */
+  --particle-1: var(--neo-purple);
+  --particle-2: #a855f7;
+  --particle-3: #d946ef;
+  --particle-4: #c084fc;
+  --particle-5: #ffffff;
+  --particle-6: #9333ea;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    overflow-x: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  ::selection {
+    background: rgba(124,58,237,0.16);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ── Motion keyframes ───────────────────────────────────────── */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmerSweep {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Neon pulse ring — pakai biru */
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(124,58,237,0.4); }
+  70%  { box-shadow: 0 0 0 12px rgba(124,58,237,0); }
+  100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+}
+
+/* Neon flicker — efek lampu neon berkedip */
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px var(--neo-purple),
+      0 0 40px var(--neo-purple),
+      0 0 80px var(--neo-purple);
+  }
+  20%, 24%, 55% {
+    opacity: 0.8;
+    text-shadow: none;
+  }
+}
+
+/* 3D push-in keyframe (dipakai btn active) */
+@keyframes push3d {
+  0%   { transform: translate(0,0); }
+  50%  { transform: translate(5px,5px); }
+  100% { transform: translate(5px,5px); }
+}
+
+@utility animate-rise {
+  animation: riseIn 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility animate-float-soft {
+  animation: floatSoft 5.5s ease-in-out infinite;
+}
+
+@utility animate-pulse-ring {
+  animation: pulseRing 2.2s ease-out infinite;
+}
+
+@utility animate-neon-flicker {
+  animation: neonFlicker 3s infinite alternate;
+}
+
+@utility shimmer {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(124,58,237,0.22),
+      rgba(124,58,237,0.16),
+      transparent
+    );
+    animation: shimmerSweep 2.4s ease-in-out infinite;
+  }
+}
+
+/* ── Partikel klik ────────────────────────────────────────── */
+@keyframes particleBurst {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--p-x), var(--p-y)) rotate(var(--p-rot)) scale(0.4);
+    opacity: 0;
+  }
+}
+
+@utility neo-particle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--p-color, var(--color-primary));
+  border: 2px solid var(--neo-ink);
+  box-shadow: 0 0 6px 1px var(--p-color, var(--color-primary));
+  animation: particleBurst var(--p-duration, 600ms) cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* ── Reusable utilities — 3D NeonBrutalism ──────────────────
+   Border biru + shadow 3D biru gelap.
+   Hover: angkat + neon glow.
+   Active: tekan ke arah shadow (fisik 3D). */
+
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: var(--neo-border-w) solid var(--neo-purple);
+  background: var(--secondary);
+  color: var(--neo-ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: var(--shadow-sm);
+}
+
+@utility glass-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  border: var(--neo-border-w) solid var(--neo-purple);
+  background: #ffffff;
+  color: var(--neo-ink);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
+}
+
+@utility glass-card-hover {
+  will-change: transform;
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 0 var(--neo-purple-dark), var(--glow-blue);
+  }
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 var(--neo-purple-dark);
+  }
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: var(--neo-border-w) solid var(--neo-ink);
+  background: var(--neo-purple);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  cursor: pointer;
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 var(--neo-purple-dark), var(--glow-blue);
+  }
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 0 var(--neo-purple-dark);
+  }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-md);
+  border: var(--neo-border-w) solid var(--neo-purple);
+  background: #ffffff;
+  color: var(--neo-purple);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  cursor: pointer;
+  &:hover {
+    background: var(--secondary);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--neo-purple-dark), var(--glow-blue);
+  }
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--neo-purple-dark);
+  }
+}
+
+@utility text-accent-soft {
+  color: var(--color-muted-foreground);
+  font-weight: 700;
+}
+
+@utility lego-stat {
+  border-radius: var(--radius-md);
+  border: var(--neo-border-w) solid var(--neo-purple);
+  padding: 0.85rem;
+  background: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
