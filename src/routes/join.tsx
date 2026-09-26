@@ -55,7 +55,7 @@ type TikTokProfile = {
   followerCount: number;
 };
 
-type GenResult = { gen: string; label: string; desc: string };
+type GenResult = { gen: string; label: string; desc: string; detectedAs: string; aiReason: string };
 
 async function callSelectionApi<T>(action: string, body: unknown): Promise<T> {
   const res = await fetch(`${SELECTION_API_BASE}/${action}`, {
@@ -294,13 +294,13 @@ function JoinPage() {
               <ol className="space-y-2.5 text-sm">
                 <li className="flex gap-2.5">
                   <Users className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                  <span>Wajib posting konten terkait editor/anime secara aktif.</span>
+                  <span>Wajib aktif posting konten — preset/AMV/edit (Gen 1 & 3) atau konten anime/manga/manhwa (Gen 2).</span>
                 </li>
                 <li className="flex gap-2.5">
                   <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   <span>
                     Wajib pakai hashtag <span className="font-mono font-bold">#{SELECTION_HASHTAG}</span> di video
-                    verifikasi.
+                    verifikasi. AI akan membaca caption untuk menentukan generasimu secara otomatis.
                   </span>
                 </li>
                 <li className="flex gap-2.5">
@@ -322,7 +322,9 @@ function JoinPage() {
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-xs font-bold tracking-widest uppercase">{rule.gen}</span>
                       <span className="font-mono text-xs font-bold" style={{ color: genTints[i] }}>
-                        {rule.max == null ? "Bebas" : `${rule.min}–${rule.max.toLocaleString("id-ID")} followers`}
+                        {rule.minFollowers > 0
+                          ? `${rule.minFollowers.toLocaleString("id-ID")}+ followers`
+                          : "Bebas followers"}
                       </span>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
@@ -444,8 +446,17 @@ function JoinPage() {
                   Kembali
                 </button>
                 <button onClick={handleVerifyPost} disabled={loading} className="btn-primary flex-1 justify-center">
-                  {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
-                  Konfirmasi
+                  {loading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      AI menganalisis...
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className="h-4 w-4" />
+                      Konfirmasi
+                    </>
+                  )}
                 </button>
               </div>
             </>
@@ -463,6 +474,21 @@ function JoinPage() {
                 <span className="font-bold text-foreground">{result.gen}</span> — {result.label}.
               </p>
               <p className="mx-auto mt-2 max-w-sm text-xs text-muted-foreground">{result.desc}</p>
+              {result.detectedAs && (
+                <div className="mx-auto mt-3 max-w-sm space-y-2">
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1">
+                    <Sparkles className="h-3 w-3 text-accent" />
+                    <span className="font-mono text-xs text-accent">
+                      AI mendeteksi: <span className="font-bold">{result.detectedAs}</span>
+                    </span>
+                  </div>
+                  {result.aiReason && (
+                    <p className="text-xs text-muted-foreground italic">
+                      &ldquo;{result.aiReason}&rdquo;
+                    </p>
+                  )}
+                </div>
+              )}
 
               <a href={WA_URL_DIRECT} target="_blank" rel="noopener" className="btn-primary mt-6 w-full justify-center">
                 Gabung Grup
