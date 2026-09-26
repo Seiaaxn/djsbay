@@ -79,16 +79,29 @@ function useElapsedSeconds() {
 
 /* ── Realistic tick generator with occasional spikes ────────── */
 function useRealisticTicks(seed: number, min: number, max: number, interval = 1400) {
-  const [vals, setVals] = useState<number[]>(() => {
-    // Seed initial history with slight variation
-    return Array.from({ length: TICKS }, (_, i) => {
-      const jitter = (Math.random() - 0.5) * 6;
-      return Math.min(max, Math.max(min, seed + jitter + Math.sin(i * 0.5) * 4));
-    });
-  });
+  // Nilai awal HARUS deterministik (tanpa Math.random) supaya sama persis
+  // antara render di server (SSR) dan render pertama di client — kalau beda,
+  // React akan gagal hydrate dan itu bisa memicu error boundary root.
+  const [vals, setVals] = useState<number[]>(() =>
+    Array.from({ length: TICKS }, (_, i) =>
+      Math.min(max, Math.max(min, seed + Math.sin(i * 0.5) * 4)),
+    ),
+  );
   const cur = useRef(seed);
   const trend = useRef(0); // momentum
-  const spikeCountdown = useRef(Math.floor(Math.random() * 8) + 4);
+  const spikeCountdown = useRef(4);
+
+  // Acak-acak riwayat awal HANYA di client, setelah mount (tidak ikut SSR).
+  useEffect(() => {
+    spikeCountdown.current = Math.floor(Math.random() * 8) + 4;
+    setVals((prev) =>
+      prev.map((v) => {
+        const jitter = (Math.random() - 0.5) * 6;
+        return Math.min(max, Math.max(min, v + jitter));
+      }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const id = setInterval(() => {
