@@ -77,45 +77,45 @@ const dictionaries = {
         label: "Seleksi",
         badge: "Wajib Seleksi",
         title: "Jalur Seleksi",
-        audience: "Khusus untuk creator preset, l2d, anime, manga, manhwa, manhua, dan sejenisnya.",
-        desc: "Wajib mengikuti seleksi terlebih dahulu. Kamu akan diverifikasi, submit karya, lalu direview oleh admin sebelum resmi bergabung.",
+        audience: "Khusus creator preset, AMV, L2D, dan edit video (Gen 1 & Gen 3).",
+        desc: "Wajib mengikuti seleksi terlebih dahulu. Kamu akan diverifikasi, submit karya, lalu AI menentukan generasimu otomatis berdasarkan caption video & jumlah followers.",
         cta: "Mulai Seleksi",
       },
       path2: {
         label: "Jalur 2",
         badge: "Tanpa Seleksi",
         title: "Jalur Langsung",
-        audience: "Khusus creator anime, manhwa, manhua, dan lain-lain.",
-        desc: "Tidak perlu melakukan seleksi. Gen ini khusus untuk creator anime, manhwa, manhua, dan konten sejenis - langsung masuk dan onboarding.",
+        audience: "Khusus creator anime, manga, manhwa, manhua, dan konten sejenis (Gen 2).",
+        desc: "Tidak perlu seleksi rumit. Gen 2 khusus untuk creator konten anime, manga, manhwa, manhua — langsung masuk dan onboarding tanpa syarat followers.",
         cta: "Gabung Langsung",
       },
       reqTitle: "Syarat Umum",
       requirements: [
         { title: "Umur 13+", desc: "Wajib berusia minimal 13 tahun." },
-        { title: "Creator aktif", desc: "Preset, anime edit, atau konten kreatif lainnya." },
+        { title: "Creator aktif", desc: "Preset, AMV, anime edit, manga, atau konten kreatif lainnya." },
         { title: "Siap CN", desc: "Akun siap change name & pakai hashtag marga." },
       ],
-      genReqTitle: "Syarat Followers per Generasi",
+      genReqTitle: "Syarat per Generasi",
       genReqDesc:
-        "Tiap generasi punya standar followers minimal yang berbeda. Cek dulu kamu masuk kategori yang mana.",
+        "Tiga generasi dengan fokus konten berbeda. AI secara otomatis menentukan generasimu dari caption video & jumlah followers.",
       genRequirements: [
         {
           gen: "Gen 1",
-          subtitle: "Para Sepuh",
+          subtitle: "Creator Preset & AMV",
           followers: 500,
-          note: "Minimal 500 followers TikTok, wajib lolos seleksi (Jalur 1), khusus creator preset & L2D.",
+          note: "Minimal 500 followers TikTok. Wajib seleksi. Khusus creator preset, AMV, L2D, dan edit video.",
         },
         {
           gen: "Gen 2",
-          subtitle: "Anomali",
-          followers: 200,
-          note: "Minimal 200 followers TikTok, aktif sebagai creator anime, manhwa, atau manhua.",
+          subtitle: "Creator Anime & Manga",
+          followers: 0,
+          note: "Bebas followers, tanpa seleksi ketat. Khusus creator konten anime, manga, manhwa, manhua, dan sejenisnya.",
         },
         {
           gen: "Gen 3",
-          subtitle: "Newbie",
+          subtitle: "Creator Preset & AMV (Pemula)",
           followers: 0,
-          note: "Open member, tanpa syarat followers minimal - cocok untuk yang baru mulai.",
+          note: "Sama seperti Gen 1 tapi tanpa syarat followers minimal. Wajib seleksi. Cocok untuk yang baru mulai bikin konten preset/AMV/edit.",
         },
       ],
       flowTitle: "Alur Seleksi",
@@ -131,19 +131,39 @@ const dictionaries = {
       faqs: [
         {
           q: "Apa itu Five Fail Family?",
-          a: "Sebuah marga editor & kreator anime di TikTok. Tempat berkarya, kolaborasi, dan bertumbuh bareng.",
+          a: "Sebuah marga editor & kreator anime di TikTok. Tempat berkarya, kolaborasi, dan bertumbuh bareng dalam satu komunitas.",
         },
         {
-          q: "Apakah wajib seleksi?",
-          a: "Ya, kalian harus seleksi terlebih dahulu sebelum masuk ke grup utama..",
+          q: "Apa bedanya Gen 1, Gen 2, dan Gen 3?",
+          a: "Gen 1 khusus creator preset, AMV, L2D, dan edit video dengan minimal 500 followers. Gen 2 khusus creator konten anime, manga, manhwa, dan manhua tanpa syarat followers. Gen 3 sama seperti Gen 1 tapi bebas followers — cocok untuk yang baru mulai.",
+        },
+        {
+          q: "Bagaimana AI menentukan generasi saya?",
+          a: "Saat kamu submit link video di step 4, AI membaca caption video secara otomatis. Kalau caption mengandung kata kunci anime/manga (misalnya 'One Piece', 'anime edit', 'manhwa', dll) maka kamu masuk Gen 2. Kalau mengandung kata kunci preset/AMV/edit, kamu masuk Gen 1 atau Gen 3 tergantung jumlah followers.",
+        },
+        {
+          q: "Apakah wajib seleksi untuk semua gen?",
+          a: "Gen 1 dan Gen 3 wajib seleksi lewat wizard di halaman ini. Gen 2 bisa langsung bergabung tanpa seleksi ketat — cukup ikuti jalur langsung.",
         },
         {
           q: "Apa saja syarat seleksi?",
-          a: "Minimal usia 13 tahun, aktif sebagai creator, akun siap change name (CN), dan bersedia memakai hashtag resmi marga.",
+          a: "Minimal usia 13 tahun, aktif sebagai creator, akun siap change name (CN), dan bersedia memakai hashtag resmi marga di setiap video.",
+        },
+        {
+          q: "Apakah ada syarat followers untuk Gen 2 dan Gen 3?",
+          a: "Tidak ada. Gen 2 dan Gen 3 bebas followers — bahkan akun baru pun bisa masuk. Hanya Gen 1 yang mensyaratkan minimal 500 followers.",
         },
         {
           q: "Berapa lama proses seleksinya?",
-          a: "Umumnya 1–7 hari tergantung antrean. Hasil diumumkan langsung di grup seleksi.",
+          a: "Proses di website berlangsung otomatis dalam hitungan menit. Setelah lolos, kamu punya batas waktu 5 menit untuk langsung join grup WhatsApp.",
+        },
+        {
+          q: "Saya creator anime tapi punya 1.000 followers, masuk Gen berapa?",
+          a: "Masuk Gen 2. Konten anime/manga selalu diprioritaskan untuk Gen 2 tanpa melihat jumlah followers.",
+        },
+        {
+          q: "Saya creator preset tapi followers masih 100, masuk Gen berapa?",
+          a: "Masuk Gen 3 — khusus creator preset/AMV/edit tanpa syarat followers minimal. Gen 3 adalah jalur masuk yang tepat untuk kamu.",
         },
         {
           q: "Apakah ada biaya?",
@@ -152,6 +172,14 @@ const dictionaries = {
         {
           q: "Kalau ditolak, boleh mendaftar lagi?",
           a: "Boleh. Perbaiki dulu konten/akun lalu daftar ulang setelah jeda minimal 7 hari.",
+        },
+        {
+          q: "Apa itu change name (CN) dan kenapa wajib?",
+          a: "CN adalah mengganti nama TikTok sesuai format marga Five Fail Family. Ini penting untuk identitas marga dan memudahkan orang mengenali member 5F di TikTok. Kamu wajib CN maksimal 1x24 jam setelah dinyatakan lolos.",
+        },
+        {
+          q: "Apakah saya bisa pindah generasi setelah bergabung?",
+          a: "Perpindahan gen diputuskan oleh admin berdasarkan perkembangan konten dan followers kamu. Hubungi admin marga untuk informasi lebih lanjut.",
         },
       ],
       ctaTitle: "Siap gabung?",
@@ -308,48 +336,48 @@ const dictionaries = {
       pathsTitle: "Choose Your Path",
       pathsDesc: "Two different paths - read the descriptions before joining a group.",
       path1: {
-        label: "Path 1",
+        label: "Selection",
         badge: "Selection Required",
         title: "Selection Path",
-        audience: "For preset creators, L2D, and similar.",
-        desc: "You must pass a selection first. You'll be verified, submit your work, and be reviewed by admins before officially joining.",
+        audience: "For preset, AMV, L2D, and video edit creators (Gen 1 & Gen 3).",
+        desc: "You must go through selection first. You'll be verified, submit a video, and AI will automatically determine your generation based on caption content and follower count.",
         cta: "Start Selection",
       },
       path2: {
-        label: "Path 2",
+        label: "Direct Path",
         badge: "No Selection",
         title: "Direct Path",
-        audience: "For anime, manhwa, manhua creators, and more.",
-        desc: "No selection needed. This gen is dedicated to anime, manhwa, manhua, and similar content creators - join directly and get onboarded.",
+        audience: "For anime, manga, manhwa, manhua content creators (Gen 2).",
+        desc: "No strict selection needed. Gen 2 is dedicated to anime, manga, manhwa, manhua creators — join directly with no follower requirements.",
         cta: "Join Directly",
       },
       reqTitle: "General Requirements",
       requirements: [
         { title: "Age 13+", desc: "Must be at least 13 years old." },
-        { title: "Active creator", desc: "Presets, anime edits, or other creative content." },
+        { title: "Active creator", desc: "Presets, AMV, anime edits, manga, or other creative content." },
         { title: "Ready to CN", desc: "Ready to change name & use the clan hashtags." },
       ],
-      genReqTitle: "Follower Requirements per Generation",
+      genReqTitle: "Requirements per Generation",
       genReqDesc:
-        "Each generation has a different minimum follower standard. Check which category you fit into first.",
+        "Three generations with different content focuses. AI automatically assigns your generation from your video caption & follower count.",
       genRequirements: [
         {
           gen: "Gen 1",
-          subtitle: "Veterans",
+          subtitle: "Preset & AMV Creator",
           followers: 500,
-          note: "Minimum 500 TikTok followers, must pass selection (Path 1), for preset & L2D creators only.",
+          note: "Minimum 500 TikTok followers. Selection required. For preset, AMV, L2D, and video edit creators.",
         },
         {
           gen: "Gen 2",
-          subtitle: "Anomaly",
-          followers: 200,
-          note: "Minimum 200 TikTok followers, active as an anime, manhwa, or manhua creator.",
+          subtitle: "Anime & Manga Creator",
+          followers: 0,
+          note: "No follower requirement, no strict selection. For anime, manga, manhwa, and manhua content creators.",
         },
         {
           gen: "Gen 3",
-          subtitle: "Newbie",
+          subtitle: "Preset & AMV Creator (Beginner)",
           followers: 0,
-          note: "Open member, no minimum follower requirement - great for those just starting out.",
+          note: "Same as Gen 1 but no minimum follower requirement. Selection required. For those just starting out with preset/AMV/edit content.",
         },
       ],
       flowTitle: "Selection Flow (Path 1)",
@@ -365,19 +393,39 @@ const dictionaries = {
       faqs: [
         {
           q: "What is Five Fail Family?",
-          a: "A clan of anime editors & creators on TikTok. A place to create, collaborate, and grow together.",
+          a: "A clan of anime editors & creators on TikTok. A place to create, collaborate, and grow together in one community.",
         },
         {
-          q: "What's the difference between Path 1 and Path 2?",
-          a: "Path 1 is for preset creators, L2D, etc. and requires selection first. Path 2 has no selection and is dedicated to anime, manhwa, and manhua creators.",
+          q: "What's the difference between Gen 1, Gen 2, and Gen 3?",
+          a: "Gen 1 is for preset, AMV, L2D, and video edit creators with at least 500 followers. Gen 2 is for anime, manga, manhwa, and manhua content creators with no follower requirement. Gen 3 is the same as Gen 1 but with no follower requirement — perfect for beginners.",
+        },
+        {
+          q: "How does AI determine my generation?",
+          a: "When you submit your video link in step 4, AI reads the caption automatically. If it contains anime/manga keywords (e.g. 'One Piece', 'anime edit', 'manhwa', etc.) you go into Gen 2. If it contains preset/AMV/edit keywords, you go into Gen 1 or Gen 3 depending on your follower count.",
+        },
+        {
+          q: "Is selection required for all generations?",
+          a: "Gen 1 and Gen 3 require selection through the wizard on this page. Gen 2 can join directly without strict selection.",
         },
         {
           q: "What are the selection requirements?",
-          a: "At least 13 years old, active as a creator, account ready for a change name (CN), and willing to use the official clan hashtags.",
+          a: "At least 13 years old, active as a creator, account ready for a change name (CN), and willing to use the official clan hashtags on every video.",
+        },
+        {
+          q: "Is there a follower requirement for Gen 2 and Gen 3?",
+          a: "No. Gen 2 and Gen 3 have no follower requirements — even brand new accounts are welcome. Only Gen 1 requires a minimum of 500 followers.",
         },
         {
           q: "How long does the selection take?",
-          a: "Usually 1–7 days depending on the queue. Results are announced directly in the selection group.",
+          a: "The process on the website is fully automatic and takes just minutes. Once you pass, you have 5 minutes to join the WhatsApp group.",
+        },
+        {
+          q: "I make anime content but have 1,000 followers — which gen am I?",
+          a: "Gen 2. Anime/manga content creators always go to Gen 2 regardless of follower count.",
+        },
+        {
+          q: "I make preset content but only have 100 followers — which gen am I?",
+          a: "Gen 3 — specifically for preset/AMV/edit creators with no minimum follower requirement. Gen 3 is the right path for you.",
         },
         {
           q: "Is there any fee?",
@@ -386,6 +434,14 @@ const dictionaries = {
         {
           q: "If rejected, can I apply again?",
           a: "Yes. Improve your content/account first, then reapply after at least 7 days.",
+        },
+        {
+          q: "What is change name (CN) and why is it required?",
+          a: "CN means changing your TikTok name to match the Five Fail Family clan format. It's important for clan identity and makes it easy for others to recognize 5F members on TikTok. You must CN within 24 hours of passing.",
+        },
+        {
+          q: "Can I switch generations after joining?",
+          a: "Generation changes are decided by admins based on your content growth and follower count. Contact the clan admins for more information.",
         },
       ],
       ctaTitle: "Ready to join?",
